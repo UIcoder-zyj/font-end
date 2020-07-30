@@ -1,0 +1,6 @@
+export const LOGIN = 'LOGIN'
+export const REGISTER= 'REGISTER'
+export const TOKEN = 'TOKEN'
+export const USERINFO = 'USERINFO'
+export const LOGINSTATUS = 'LOGINSTATUS'
+export const REGISTERSTATUS= 'REGISTERSTATUS'
