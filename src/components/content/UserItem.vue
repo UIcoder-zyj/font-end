@@ -57,7 +57,8 @@ export default {
           loginUser: this.username,
           loginPassword: this.password
         }).then((res) => {
-          console.log(res);
+          this.$router.replace('/slam');
+
         }).catch((error) => {
           console.log(error)
         })

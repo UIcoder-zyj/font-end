@@ -5,7 +5,13 @@ const mutations = {
     state.token = payload
   },
   [types.USERINFO]: (state, payload) => {
-    state.userInfo = payload
+    state.user_info = payload
+  },
+  [types.MAPINFO]: (state, payload) => {
+    state.map_info = payload
+  },
+  [types.UGVINFO]: (state, payload) => {
+    state.ugv_info = payload
   },
   [types.LOGINSTATUS]: (state, payload) => {
     state.loginStatus = payload

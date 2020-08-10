@@ -16,8 +16,9 @@ import actions from './actions.js'
 Vue.use(Vuex)
 
 const state = {
-  token: window.localStorage.getItem('token'),
-  userInfo: {},
+  user_info: {},
+  map_info: {},
+  ugv_info: {},
   loginStatus: false,
   registerStatus: false,
 }

@@ -1,10 +1,9 @@
 import axios from 'axios'
 import router from '../router'
-
+import store from 'store/index'
 const baseURL=process.env.NODE_ENV === 'production' ?'http://sayhub.me/api' : 'http://localhost:7001';
 const timeout=5000;
-
-export default class API{
+class API{
   static getInstance(){
     if(!this.apiInstance){
         this.apiInstance=new API();
@@ -28,6 +27,11 @@ export default class API{
 
   interceptRequest(config){
     return this.instance.interceptors.request.use(config=>{
+      let token;
+      if(store.state.user_info&&store.state.user_info.token){
+        token=this.$store.user_info.token;
+        config.headers.common['Authorization'] = token;
+      }
      return config;
     },err=>{
      console.log(err);
@@ -36,13 +40,14 @@ export default class API{
 
   interceptResponse(config){
     return  this.instance.interceptors.response.use(res=>{
+      console.log("res is:",res);
       return res;
     },error=>{
       console.log('response error is :',error)
       if (error.response) {
         console.log(error.response);
         switch (error.response.status) {
-          case 401:
+          case 501:
             router.replace({
               path: 'login',
             })
@@ -67,10 +72,13 @@ export default class API{
       method: 'get',
       params: data
     }
-    return request(config);
+    return this.request(config);
  };
-
 };
+const api=API.getInstance();
+export default api;
+
+
 
 
 

@@ -1,5 +1,8 @@
 import * as types from './types'
 import UserRequestHandler from 'network/user'
+import userUtil  from 'common/user.js'
+import mapUtil  from 'common/map.js'
+import ugvUtil  from 'common/ugv.js'
 
 const userRequest=new UserRequestHandler();
 export default {
@@ -7,10 +10,9 @@ export default {
     return new Promise((resolve, reject) => {
       userRequest.login(payload).then(res => {
         if (res.status === 200) {
-          commit(types.LOGIN, res.data.token)
-          commit(types.LOGINSTATUS, true)
-         // instance.defaults.headers.common['Authorization'] = `Bearer ` + res.data.token
-          window.localStorage.setItem('token', res.data.token)
+          userUtil.loadUserInfo(commit,res.data.user_state);
+          ugvUtil.loadUgvInfo(commit,res.data.ugv_state);
+          mapUtil.loadMapInfo(commit,res.data.map_state);
           resolve(res)
         }
       }).catch((error) => {
@@ -25,8 +27,6 @@ export default {
         if (res.status === 200) {
           //commit(types.REGISTER, res.data)
           commit(types.REGISTERSTATUS, true)
-         // instance.defaults.headers.common['Authorization'] = `Bearer ` + res.data.token
-         // window.localStorage.setItem('token', res.data.token)
           resolve(res)
         }
       }).catch((error) => {

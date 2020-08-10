@@ -1,14 +1,12 @@
-import API from "./api";
-import axios from 'axios'
-import  api_config from './api_config.js'
+import api from "./api";
+import  apiConfig from './apiConfig.js'
 
-const api=API.getInstance();
 export default class UserRequestHandler {
   constructor(){
   }
 
   login({ loginUser, loginPassword }){
-    let {url,method}=api_config.login;
+    let {url,method}=apiConfig.login;
     return api.request({
       url,
       method,
@@ -20,7 +18,7 @@ export default class UserRequestHandler {
   }
 
   register({ registerUser, registerPassword }){
-    let {url,method}=api_config.register;
+    let {url,method}=apiConfig.register;
     return api.request({
       url,
       method,

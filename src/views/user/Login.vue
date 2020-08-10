@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import UserItem from "components/content/user/UserItem";
+import UserItem from "components/content/UserItem";
 export default {
   data() {
     return {};
