@@ -1,16 +1,16 @@
 <template>
   <div class="resource">
     <el-tabs tab-position="left" v-model="activeName" type="card">
-      <el-tab-pane label="地图管理" name="first">
+      <el-tab-pane label="地图管理" name="first" style='margin-right:0px'>
         <maps-show class="resource-item" />
       </el-tab-pane>
-      <el-tab-pane label="底盘参数" name="second">
+      <el-tab-pane label="底盘参数" name="second" style='margin-right:0px'>
         <chassis-param class="resource-item" />
       </el-tab-pane>
-      <el-tab-pane label="轨迹参数" v-if="type==='nav'" name="third">
+      <el-tab-pane label="轨迹参数" v-if="type==='nav'" name="third" style='margin-right:0px'>
         <trajectory-param class="resource-item" />
       </el-tab-pane>
-      <el-tab-pane label="底盘控制" name="fourth">
+      <el-tab-pane label="底盘控制" name="fourth" style='margin-right:0px'>
         <chassis-control class="resource-item" />
       </el-tab-pane>
 
@@ -48,6 +48,9 @@ export default {
 };
 </script>
 <style scoped>
+.el-tabs--left .el-tabs__header.is-left{
+  margin-right: 3px;
+}
 .el-button-style {
   margin-top: 20px;
 }

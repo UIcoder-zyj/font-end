@@ -2,6 +2,8 @@
   <div class="slam">
     <framework class="container" current_index="0">
       <div slot="main" class="main">
+                  <div style=" clear:both;"></div>
+
         <el-row>
           <div v-for="(item, index) in worker" :key="index" class="worker-item">
             <el-button v-if="item.type === 'button'" round>
@@ -24,14 +26,11 @@
           </div>
           <el-button type="danger" @click.native="clickB" class="stop" round>停车</el-button>
         </el-row>
-        <el-row :gutter="20" class="tab-bar" style="margin-left: 0px; margin-right: 0px;">
-          <el-col style="width:500px">
+        <div class='main-show'>
+          <div style=" clear:both;"></div>
             <resource class="resource" type="slam" />
-          </el-col>
-          <el-col :span="16">
-            <!-- <resource class="resource" /> -->
-          </el-col>
-        </el-row>
+            <div id='map' class='map' />
+        </div>
       </div>
       <div slot="footer">
         <span>slam footer</span>
@@ -86,6 +85,28 @@ export default {
       messageType: "geometry_msgs/Twist",
     });
   },
+  mounted(){
+    const viewer = new this.$ROS3D.Viewer({
+      divID : 'map',
+      width : 400,
+      height : 300,
+      antialias : true
+    });
+    const tfClient = new this.$ROSLIB.TFClient({
+        ros : this.$ros,
+        fixedFrame : 'map',
+        angularThres : 0.01,
+        transThres : 0.01
+    });
+    const gridClient = new this.$ROS3D.OccupancyGridClient({
+        ros : this.$ros,
+        viewer: viewer,
+        tfClient: tfClient,
+        rootObject : viewer.selectableObjects,
+        continuous : true,
+        name: 'occupancyGrid'
+    });
+  },
   methods: {
     getUserInfo() {
       this.$store.dispatch("getUserInfo");
@@ -125,6 +146,38 @@ body {
   height: 100%;
   margin-top: 0;
 }
+.main {
+  /* display:inline-block; */
+  /* float:left; */
+  position: relative;
+  height: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  /* overflow: hidden; */
+}
+.main-show{
+  float: left;
+  /* display:inline-block; */
+  position: relative;
+  bottom: 0
+}
+.resource {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 9;
+  width: 600px;
+  /* background-color: white; */
+}
+.map{
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  right: 0px;
+  bottom: 0px;
+  height: 100%
+
+}
 .worker-item {
   width: 100px;
   padding-left: 10px;
@@ -146,15 +199,8 @@ body {
 /* .dropdown {
   margin-left: 10px;
 } */
-/* .resource {
-  width: 500px;
-} */
-.main {
-  position: relative;
-  height: 100%;
-  margin-left: 0px;
-  margin-right: 0px;
-}
+
+
 .tab-bar {
   position: relative;
   z-index: 9;

@@ -68,6 +68,9 @@ export default {
 </script>
 
 <style scoped>
+.chassis-control{
+  background-color: white;
+}
 .keytable {
   /*为表格设置合并边框模型*/
   border-collapse: collapse;
