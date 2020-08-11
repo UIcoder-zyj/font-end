@@ -1,7 +1,13 @@
 /* 全局样式表 */
+*{
+  margin: 0;
+  padding: 0;
+}
 html, body, #app{
   height: 100%;
   margin: 0;
   padding: 0;
-  /* background-color: #2b4b6b; */
+}
+body{
+  background-color: #f5f5f5;
 }

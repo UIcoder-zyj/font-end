@@ -3,6 +3,7 @@
     <div slot="main">
       <span>editor Main</span>
     </div>
+
     <div slot="footer">
       <span>editor footer</span>
     </div>
@@ -31,4 +32,5 @@ body {
   text-align: center;
   height: 100%;
 }
+
 </style>

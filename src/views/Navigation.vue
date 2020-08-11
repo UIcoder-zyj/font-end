@@ -110,11 +110,9 @@ body {
   padding-bottom: 10px;
 }
 .container {
-  text-align: center;
   height: 100%;
 }
 .navigation {
-  text-align: center;
   height: 100%;
 }
 .stop {
@@ -133,18 +131,6 @@ body {
   margin-left: 0px;
   margin-right: 0px;
 }
-/* .main-center{
-  position: absolute;
-  top: 60px;
-  bottom: 8px;
-  left: 0;
-  right: 0;
-  margin-left: 0px;
-  margin-right:0px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-} */
 .logOut {
   margin-top: 20px;
 }

@@ -65,17 +65,9 @@ export default {
 };
 </script>
 <style scoped>
-.el-menu-demo {
-  /* height: 100px; */
-}
-.el-menu-demo el-menu-item {
-  font-size: 100px;
-}
+
 .user-info {
   position: absolute;
   right: 0px;
-  /* width: 300px; */
-  /* border: 3px solid #73AD21; */
-  /* padding: 10px; */
 }
 </style>

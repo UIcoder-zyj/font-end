@@ -48,15 +48,14 @@ export default {
 };
 </script>
 <style scoped>
-.el-tabs--left .el-tabs__header.is-left{
-  margin-right: 3px;
+.resource {
+  position: absolute
+}
+ .resource .resource-item{
+  width: 500px;
 }
 .el-button-style {
   margin-top: 20px;
 }
-/* .resource-item{
-  position: absolute;
-  top: 120px;
-  left: 107px;
-} */
+
 </style>

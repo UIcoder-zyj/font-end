@@ -2,9 +2,7 @@
   <div class="slam">
     <framework class="container" current_index="0">
       <div slot="main" class="main">
-                  <div style=" clear:both;"></div>
-
-        <el-row>
+        <div class='worker'>
           <div v-for="(item, index) in worker" :key="index" class="worker-item">
             <el-button v-if="item.type === 'button'" round>
               {{
@@ -25,9 +23,8 @@
             </el-dropdown>
           </div>
           <el-button type="danger" @click.native="clickB" class="stop" round>停车</el-button>
-        </el-row>
+        </div>
         <div class='main-show'>
-          <div style=" clear:both;"></div>
             <resource class="resource" type="slam" />
             <div id='map' class='map' />
         </div>
@@ -72,6 +69,14 @@ export default {
         },
       ],
       cmd_vel: {},
+      width: {
+        type: Number,
+        default: 0
+      },
+      height: {
+        type: Number,
+        default: 0
+      }
     };
   },
   components: {
@@ -79,17 +84,15 @@ export default {
     Resource,
   },
   created() {
-    this.cmd_vel = new this.$ROSLIB.Topic({
-      ros: this.$ros,
-      name: "/cmd_vel",
-      messageType: "geometry_msgs/Twist",
-    });
+
   },
   mounted(){
+    this.width=document.body.clientWidth-150;
+    this.height=document.body.clientHeight-190
     const viewer = new this.$ROS3D.Viewer({
       divID : 'map',
-      width : 400,
-      height : 300,
+      width : this.width,
+      height : this.height,
       antialias : true
     });
     const tfClient = new this.$ROSLIB.TFClient({
@@ -146,78 +149,39 @@ body {
   height: 100%;
   margin-top: 0;
 }
-.main {
-  /* display:inline-block; */
-  /* float:left; */
-  position: relative;
+.slam {
   height: 100%;
-  margin-left: 0px;
-  margin-right: 0px;
-  /* overflow: hidden; */
+}
+.el-main{
+height: 100%;
+}
+.el-main .main {
+  height: 100%;
+  /* margin-left: 0px; */
+  /* margin-right: 0px; */
+
 }
 .main-show{
-  float: left;
-  /* display:inline-block; */
   position: relative;
-  bottom: 0
 }
-.resource {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 9;
-  width: 600px;
-  /* background-color: white; */
-}
-.map{
-  position: absolute;
-  top: 0px;
-  left: 100px;
-  right: 0px;
-  bottom: 0px;
-  height: 100%
-
+.worker{
+  overflow: hidden;
 }
 .worker-item {
-  width: 100px;
-  padding-left: 10px;
   float: left;
+  padding-left: 10px;
   padding-bottom: 10px;
 }
-.container {
-  text-align: center;
-  height: 100%;
-}
-.slam {
-  text-align: center;
-  height: 100%;
-}
 .stop {
-  position: absolute;
-  right: 20px;
+  float: right
 }
-/* .dropdown {
-  margin-left: 10px;
-} */
+.map{
+  margin-left: 110px;
+
+}
 
 
-.tab-bar {
-  position: relative;
-  z-index: 9;
-}
-/* .main-center{
-  position: absolute;
-  top: 60px;
-  bottom: 8px;
-  left: 0;
-  right: 0;
-  margin-left: 0px;
-  margin-right:0px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-} */
-.logOut {
-  margin-top: 20px;
-}
+
+
+
 </style>
