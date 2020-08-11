@@ -2,38 +2,14 @@
   <div class="navigation">
     <framework class="container" current_index="2">
       <div slot="main" class="main">
-        <el-row>
-          <div v-for="(item, index) in worker" :key="index" class="worker-item">
-            <el-button v-if="item.type === 'button'" round>{{
-              item.title
-            }}</el-button>
-            <el-dropdown v-else class="dropdown" trigger="hover">
-              <el-button round>
-                {{ item.title }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item
-                  v-for="(item1, index1) in item.item"
-                  :key="index1"
-                  >{{ item1.name }}</el-dropdown-item
-                >
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
-          <el-button type="danger" class="stop" round>停车</el-button>
-        </el-row>
-        <el-row :gutter="20" style="margin-left: 0px; margin-right: 0px;">
-          <el-col style="width:500px">
-            <resource class="resource" type="nav" />
-          </el-col>
-          <el-col :span="16">
-            <!-- <resource class="resource" /> -->
-          </el-col>
-        </el-row>
+        <workspace :worker="worker" />
+        <div class="main-show">
+          <resource class="resource" type="nav" />
+          <div id="map" class="map" />
+        </div>
       </div>
       <div slot="footer">
-        <span>slam footer</span>
+        <states />
       </div>
     </framework>
   </div>
@@ -41,46 +17,211 @@
 
 <script>
 import Framework from "components/content/Framework";
-import Resource from "components/content/resource/Resource";
+import Workspace from "components/content/Workspace";
+import States from "components/content/States";
 
+import Resource from "components/content/resource/Resource";
+import { rosInitMixin } from "common/mixins";
 export default {
   data() {
     return {
       worker: [
         {
-          type: "button",
-          title: "开始建图"
+          label: "button",
+          title: "初始位置",
         },
         {
-          type: "button",
-          title: "保存地图"
+          label: "button",
+          title: "任意目标",
         },
         {
-          type: "button",
-          title: "结束建图"
+          label: "menu",
+          title: "轨迹设置",
+          item: [
+            {
+              name: "载入轨迹",
+            },
+            {
+              name: "从地图去除轨迹",
+            },
+            {
+              name: "删除轨迹",
+            },
+            {
+              name: "保存轨迹",
+            },
+            {
+              name: "另存轨迹",
+            },
+            {
+              name: "添加新轨迹",
+            },
+            {
+              name: "添加轨迹点",
+            },
+            {
+              name: "删除轨迹点",
+            },
+            {
+              name: "闭合/断开轨迹",
+            },
+          ],
         },
         {
-          type: "menu",
+          label: "menu",
+          title: "工作站",
+          item: [
+            {
+              name: "去工作站(id)",
+            },
+            {
+              name: "去工作站(给定)",
+            },
+            {
+              name: "机器人位置添加工作站",
+            },
+            {
+              name: "手动添加工作站",
+            },
+            {
+              name: "序号删除工作站",
+            },
+            {
+              name: "手动删除工作站",
+            },
+            {
+              name: "序号删除工作站(数据库)",
+            },
+            {
+              name: "手动删除工作站(数据库)",
+            },
+          ],
+        },
+        {
+          label: "menu",
+          title: "充电桩",
+          item: [
+            {
+              name: "去充电桩(id)",
+            },
+            {
+              name: "去充电桩(给定)",
+            },
+            {
+              name: "机器人位置添加充电桩",
+            },
+            {
+              name: "手动添加充电桩",
+            },
+            {
+              name: "序号删除充电桩",
+            },
+            {
+              name: "手动删除充电桩",
+            },
+            {
+              name: "序号删除充电桩(数据库)",
+            },
+            {
+              name: "手动删除充电桩(数据库)",
+            },
+          ],
+        },
+        {
+          label: "menu",
+          title: "虚拟墙",
+          item: [
+            {
+              name: "载入虚拟墙(id)",
+            },
+            {
+              name: "从地图去除虚拟墙(id)",
+            },
+            {
+              name: "数据库去除虚拟墙(id)",
+            },
+            {
+              name: "从地图去除虚拟墙",
+            },
+            {
+              name: "数据库去除虚拟墙（位置)",
+            },
+            {
+              name: "添加新虚拟墙",
+            },
+            {
+              name: "添加虚拟点",
+            },
+            {
+              name: "删除虚拟点",
+            },
+            {
+              name: "结束添加虚拟墙并保存",
+            },
+          ],
+        },
+        {
+          label: "menu",
           title: "默认地图",
           item: [
             {
-              name: "设置为默认地图"
+              name: "设置为默认地图",
             },
             {
-              name: "加载默认地图"
-            }
-          ]
-        }
-      ]
+              name: "加载默认地图",
+            },
+          ],
+        },
+        {
+          label: "button",
+          title: "视角变换",
+        },
+        {
+          label: "menu",
+          title: "保存设置",
+          item: [
+            {
+              name: "保存配置",
+            },
+            {
+              name: "另存为",
+            },
+          ],
+        },
+        {
+          label: "menu",
+          title: "导航",
+          item: [
+            {
+              name: "开始导航",
+            },
+            {
+              name: "终止导航",
+            },
+          ],
+        },
+        {
+          label: "button",
+          title: "上传地图",
+        },
+        {
+          label: "button",
+          title: "下载此地图",
+        },
+      ],
     };
   },
   components: {
     Framework,
-    Resource
+    Resource,
+    Workspace,
+    States,
   },
   created() {
     // this.getUserInfo()
   },
+
+  mixins: [rosInitMixin],
   methods: {
     getUserInfo() {
       this.$store.dispatch("getUserInfo");
@@ -88,10 +229,10 @@ export default {
     logOut() {
       this.$store.dispatch("logOut");
       this.$router.push({
-        path: "/login"
+        path: "/login",
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -103,35 +244,21 @@ body {
   height: 100%;
   margin-top: 0;
 }
-.worker-item {
-  width: 100px;
-  padding-left: 10px;
-  float: left;
-  padding-bottom: 10px;
-}
-.container {
-  height: 100%;
-}
 .navigation {
   height: 100%;
 }
-.stop {
-  position: absolute;
-  right: 20px;
-}
-/* .dropdown {
-  margin-left: 10px;
-} */
-.resource {
-  width: 500px;
-}
-.main {
-  position: relative;
+.el-main {
   height: 100%;
-  margin-left: 0px;
-  margin-right: 0px;
 }
-.logOut {
-  margin-top: 20px;
+.el-main .main {
+  height: 100%;
+  /* margin-left: 0px; */
+  /* margin-right: 0px; */
+}
+.main-show {
+  position: relative;
+}
+.map {
+  margin-left: 110px;
 }
 </style>

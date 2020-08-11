@@ -24,7 +24,6 @@ Vue.prototype.$ROSLIB=ROSLIB;
 Vue.prototype.$ROS3D=ROS3D;
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
-
 new Vue({
   router,
   store,
