@@ -200,7 +200,7 @@ export default {
         },
         {
           label: "menu",
-          title: "导航",
+          title: "导航操作",
           item: [
             {
               name: "开始导航",
@@ -213,6 +213,7 @@ export default {
         {
           label: "button",
           title: "上传地图",
+          link: "/api/map/upload",
         },
         {
           label: "button",

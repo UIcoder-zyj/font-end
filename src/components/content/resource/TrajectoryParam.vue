@@ -6,7 +6,7 @@
           v-for="(item, index) in nav_form"
           :key="index"
           :label="item.name"
-          label-position="left"
+          label-position="center"
           size="small"
           class="el-form-style"
         >
