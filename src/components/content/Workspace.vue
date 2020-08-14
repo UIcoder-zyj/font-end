@@ -1,21 +1,33 @@
+<!--
+ * @Descripttion:
+ * @version: 1.0.0
+ * @Author: zyj
+ * @Date: 2020-08-14 19:30:06
+ * @LastEditors: zyj
+ * @LastEditTime: 2020-08-14 21:55:59
+-->
 <template>
   <div class="worker">
     <div v-for="(item, index) in worker" :key="index" class="worker-item">
-      <el-button v-if="item.label === 'button'" round>{{ item.title }}</el-button>
+      <el-button
+        size="small"
+        v-if="item.label === 'button'"
+        round
+        @click="getSource(item.link)"
+      >{{ item.title }}</el-button>
       <el-dropdown v-else class="dropdown" trigger="hover">
-        <Button size='small' html-type='button' @click="getSource()">
-            <!-- <button >{{ item.title }} -->
-          <i class="el-icon-arrow-down el-icon--right"></i>
-        </Button>
+        <el-button size="small" round>{{ item.title }}</el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
-            v-for="(item1, index1) in item.item"
-            :key="index1"
-          >{{ item1.name }}</el-dropdown-item>
+          <el-dropdown-item v-for="(item1, index1) in item.item" :key="index1">
+            <!-- <el-button size="small" round> -->
+            {{ item1.name }}
+            <!-- <i class="el-icon-arrow-down el-icon--right"></i> -->
+            <!-- </el-button> -->
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <el-button type="danger" class="stop" round>停车</el-button>
+    <el-button type="danger" class="stop" size="small" round>停车</el-button>
   </div>
 </template>
 
@@ -32,13 +44,12 @@ export default {
     },
   },
   methods: {
-    getSource() {
-      console.log("link is : ");
-
-      // if (link) {
-      //   console.log("link is : ", link);
-      //   links[link]();
-      // }
+    getSource(link) {
+      console.log("link is : ", link, link && links[link]);
+      if (link && links[link]) {
+        console.log("link is : ", link);
+        links[link]();
+      }
     },
   },
 };
@@ -48,12 +59,13 @@ export default {
 .worker {
   overflow: hidden;
 }
+
 .worker-item {
   float: left;
-  padding-left: 10px;
+  padding-right: 10px;
   padding-bottom: 10px;
 }
 .stop {
-  float: right;
+  float: left;
 }
 </style>

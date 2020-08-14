@@ -5,15 +5,6 @@
       <resource class="resource" type="slam" />
       <div id="map" class="map" />
     </div>
-
-    <!-- <framework class="container" current_index="0">
-      <div slot="main" class="main">
-
-      </div>
-      <div slot="footer">
-        <states/>
-      </div>
-    </framework> -->
   </div>
 </template>
 

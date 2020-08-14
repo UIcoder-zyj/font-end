@@ -5,18 +5,7 @@
       <resource class="resource" type="nav" />
       <div id="map" class="map" />
     </div>
-    <!-- <framework class="container" current_index="2">
-      <div slot="main" class="main">
-        <workspace :worker="worker" />
-        <div class="main-show">
-          <resource class="resource" type="nav" />
-          <div id="map" class="map" />
-        </div>
-      </div>
-      <div slot="footer">
-        <states />
-      </div>
-    </framework>-->
+
   </div>
 </template>
 
@@ -45,30 +34,46 @@ export default {
           item: [
             {
               name: "载入轨迹",
+              link: '/api/trajectory/load'
             },
             {
               name: "从地图去除轨迹",
+              link: '/api/trajectory/remove'
             },
             {
               name: "删除轨迹",
+              link: '/api/trajectory/delete'
+
             },
             {
               name: "保存轨迹",
+              link: '/api/trajectory/save'
+
             },
             {
               name: "另存轨迹",
+              link: '/api/trajectory/save_as'
+
             },
             {
               name: "添加新轨迹",
+              link: '/api/trajectory/add'
+
             },
             {
               name: "添加轨迹点",
+              link: '/api/trajectory/add_point'
+
             },
             {
               name: "删除轨迹点",
+              link: '/api/trajectory/delete_point'
+
             },
             {
               name: "闭合/断开轨迹",
+              link: '/api/trajectory/close'
+
             },
           ],
         },
@@ -212,7 +217,7 @@ export default {
         {
           label: "button",
           title: "下载此地图",
-          link: "/api/map/download_map",
+          link: "/api/map/download",
         },
       ],
     };

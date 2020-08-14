@@ -1,13 +1,24 @@
+/*
+ * @Descripttion:
+ * @version: 1.0.0
+ * @Author: zyj
+ * @Date: 2020-08-14 19:30:06
+ * @LastEditors: zyj
+ * @LastEditTime: 2020-08-14 21:16:27
+ */
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import "element-ui/lib/theme-chalk/index.css";
 import ElementUI from "element-ui";
 
-import { Button, Table } from 'view-design';
-Vue.component('Button', Button);
-Vue.component('Table', Table);
+import ViewUI from 'view-design'
 import 'view-design/dist/styles/iview.css';
+Vue.use(ViewUI);
+
+// import { Button, Table } from 'view-design';
+// Vue.component('Button', Button);
+// Vue.component('Table', Table);
 
 import store from "./store";
 import ROSLIB from 'roslib'
