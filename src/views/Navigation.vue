@@ -1,6 +1,11 @@
 <template>
   <div class="navigation">
-    <framework class="container" current_index="2">
+    <workspace :worker="worker" />
+    <div class="main-show">
+      <resource class="resource" type="nav" />
+      <div id="map" class="map" />
+    </div>
+    <!-- <framework class="container" current_index="2">
       <div slot="main" class="main">
         <workspace :worker="worker" />
         <div class="main-show">
@@ -11,7 +16,7 @@
       <div slot="footer">
         <states />
       </div>
-    </framework>
+    </framework>-->
   </div>
 </template>
 
@@ -21,7 +26,7 @@ import Workspace from "components/content/Workspace";
 import States from "components/content/States";
 
 import Resource from "components/content/resource/Resource";
-import { rosInitMixin,getDataMixin } from "common/mixins";
+import { rosInitMixin, getDataMixin } from "common/mixins";
 export default {
   data() {
     return {
@@ -207,7 +212,7 @@ export default {
         {
           label: "button",
           title: "下载此地图",
-          link: '/api/map/download_map'
+          link: "/api/map/download_map",
         },
       ],
     };
@@ -218,7 +223,7 @@ export default {
     Workspace,
     States,
   },
-  mixins: [rosInitMixin,getDataMixin],
+  mixins: [rosInitMixin, getDataMixin],
 
   created() {
     // this.getUserInfo()

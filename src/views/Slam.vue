@@ -1,17 +1,19 @@
 <template>
   <div class="slam">
-    <framework class="container" current_index="0">
+    <workspace :worker="worker" />
+    <div class="main-show">
+      <resource class="resource" type="slam" />
+      <div id="map" class="map" />
+    </div>
+
+    <!-- <framework class="container" current_index="0">
       <div slot="main" class="main">
-        <workspace :worker="worker" />
-        <div class="main-show">
-          <resource class="resource" type="slam" />
-          <div id="map" class="map" />
-        </div>
+
       </div>
       <div slot="footer">
         <states/>
       </div>
-    </framework>
+    </framework> -->
   </div>
 </template>
 
@@ -74,30 +76,7 @@ export default {
   mounted() {
   },
   methods: {
-    // rosInit() {
-    //   this.width = document.body.clientWidth - 150;
-    //   this.height = document.body.clientHeight - 190;
-    //   const viewer = new this.$ROS3D.Viewer({
-    //     divID: "map",
-    //     width: this.width,
-    //     height: this.height,
-    //     antialias: true,
-    //   });
-    //   const tfClient = new this.$ROSLIB.TFClient({
-    //     ros: this.$ros,
-    //     fixedFrame: "map",
-    //     angularThres: 0.01,
-    //     transThres: 0.01,
-    //   });
-    //   const gridClient = new this.$ROS3D.OccupancyGridClient({
-    //     ros: this.$ros,
-    //     viewer: viewer,
-    //     tfClient: tfClient,
-    //     rootObject: viewer.selectableObjects,
-    //     continuous: true,
-    //     name: "occupancyGrid",
-    //   });
-    // },
+
     logOut() {
       this.$store.dispatch("logOut");
       this.$router.push({

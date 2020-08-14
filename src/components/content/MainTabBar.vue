@@ -1,39 +1,54 @@
 <template>
   <div class="main-tab-bar">
-    <el-menu
-      :default-active="activeIndex"
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-    >
-      <el-menu-item
-        v-for="(item, index) in titles"
-        :key="index"
-        :index="index | StringIndex"
-        >{{ item }}</el-menu-item
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        :router="true"
       >
-      <el-submenu :index="(titles.length)|StringIndex" class="user-info">
-        <template slot="title">
-          <i class="el-icon-user"></i>
-          <span>用户</span>
-        </template>
-        <el-menu-item index="2-1">后台管理系统</el-menu-item>
-        <el-menu-item index="2-2">切换用户</el-menu-item>
-        <el-menu-item index="2-3">退出登录</el-menu-item>
-      </el-submenu>
-    </el-menu>
+        <el-menu-item
+          v-for="(item, index) in items"
+          :key="index"
+          :index="item.link"
+          v-if="item.type===1"
+          router
+        >
+          <span>{{item.title}}</span>
+        </el-menu-item>
+        <el-submenu
+          v-for="(item, index) in items"
+          v-if="item.type===2"
+          :key="index"
+          class="user-info"
+          :index="item.title"
+        >
+          <template slot="title">
+            <i class="el-icon-user"></i>
+            <span>{{$store.state.user_info.username}}</span>
+          </template>
+          <el-menu-item
+           v-for="(item1,index1) in item.items"
+            :key="index1"
+            :index="item1.link"
+            >
+            <span>{{item1.title}}</span>
+          </el-menu-item>
+        </el-submenu>
+      </el-menu>
   </div>
 </template>
 
 <script>
-// import Index from './Index'
+//  import store from 'store/index'
 export default {
-  components: {},
+  components: {
+  },
   props: {
-    titles: {
+    items: {
       type: Array,
       default: []
     },
@@ -42,24 +57,11 @@ export default {
       default: '0'
     }
   },
-  data() {
-    return {
-      // activeIndex: '0'
-    };
-  },
-  filters: {
-    StringIndex(index) {
-      return index.toString();
-    }
-  },
+
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-      if(key===this.activeIndex){
-        console.log('do nothing');
-      }else{
-        this.$emit('handleSelect',keyPath);
-      }
+
     }
   }
 };

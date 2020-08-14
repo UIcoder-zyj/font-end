@@ -10,7 +10,7 @@
       <el-table-column
         v-for="(item,index) in table_head "
         :key="index"
-        :fixed="index===0"
+        :fixed="(index===0?"left":"")"
         :prop="item.field"
         :label="item.title"
         style="font-size: 10px"

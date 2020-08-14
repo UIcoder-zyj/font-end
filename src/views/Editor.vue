@@ -1,5 +1,6 @@
 <template>
-  <framework class="container" current_index='1'>
+  <span>editor Main</span>
+  <!-- <framework class="container" current_index='1'>
     <div slot="main">
       <span>editor Main</span>
     </div>
@@ -7,7 +8,7 @@
     <div slot="footer">
       <span>editor footer</span>
     </div>
-  </framework>
+  </framework> -->
 </template>
 
 <script>

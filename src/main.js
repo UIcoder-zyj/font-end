@@ -3,6 +3,12 @@ import App from "./App";
 import router from "./router";
 import "element-ui/lib/theme-chalk/index.css";
 import ElementUI from "element-ui";
+
+import { Button, Table } from 'view-design';
+Vue.component('Button', Button);
+Vue.component('Table', Table);
+import 'view-design/dist/styles/iview.css';
+
 import store from "./store";
 import ROSLIB from 'roslib'
 import * as ROS3D from './common/core3d.js'

@@ -3,15 +3,13 @@
     <div v-for="(item, index) in worker" :key="index" class="worker-item">
       <el-button v-if="item.label === 'button'" round>{{ item.title }}</el-button>
       <el-dropdown v-else class="dropdown" trigger="hover">
-        <el-button round native-type='button' @click.native="getSource(item.link)">
-          {{ item.title }}
+        <Button size='small' html-type='button' @click="getSource()">
+            <!-- <button >{{ item.title }} -->
           <i class="el-icon-arrow-down el-icon--right"></i>
-        </el-button>
+        </Button>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item
             v-for="(item1, index1) in item.item"
-            native-type='button'
-            @click.native="getSource(item1.link)"
             :key="index1"
           >{{ item1.name }}</el-dropdown-item>
         </el-dropdown-menu>
@@ -34,13 +32,13 @@ export default {
     },
   },
   methods: {
-    getSource(link) {
-      console.log("link is : ", link);
+    getSource() {
+      console.log("link is : ");
 
-      if (link) {
-        console.log("link is : ", link);
-        links[link]();
-      }
+      // if (link) {
+      //   console.log("link is : ", link);
+      //   links[link]();
+      // }
     },
   },
 };
