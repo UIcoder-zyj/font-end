@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '../store/index'
+import store from 'store/index'
 const Slam = () => import('views/Slam.vue')
 const Login = () => import('views/user/Login.vue')
 const Register = () => import('views/user/Register.vue')
@@ -14,7 +14,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/slam'
+      redirect: '/login'
     },
     {
       path: '/login',
@@ -31,7 +31,7 @@ const router = new Router({
       name: 'Slam',
       component: Slam,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -39,7 +39,7 @@ const router = new Router({
       name: 'Editor',
       component: Editor,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -47,7 +47,7 @@ const router = new Router({
       name: 'Navigation',
       component: Navigation,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
 
@@ -56,11 +56,10 @@ const router = new Router({
 
 // 注册全局钩子用来拦截导航
 router.beforeEach((to, from, next) => {
-  let token;
-  if(store.state.user_info&&store.state.user_info.token ){
-    token=store.state.user_info.token;
-  }
-  if (to.meta.requiresAuth) {
+  let token=sessionStorage.getItem('token');
+  console.log("from path is:" ,from.path," to.path is :",to.path)
+  console.log('token is :',token);
+  if (to.meta && to.meta.requiresAuth) {
     if (token) {
       //store.dispatch('getUserInfo')
       next()

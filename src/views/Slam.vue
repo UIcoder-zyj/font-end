@@ -19,8 +19,9 @@
 import Framework from "components/content/Framework";
 import Workspace from "components/content/Workspace";
 import States from "components/content/States";
-
 import Resource from "components/content/resource/Resource";
+
+import { rosInitMixin,getDataMixin } from "common/mixins";
 export default {
   data() {
     return {
@@ -66,35 +67,37 @@ export default {
     Workspace,
     States
   },
-  created() {},
+  mixins: [rosInitMixin,getDataMixin],
+
+  created() {
+  },
   mounted() {
-    this.rosInit();
   },
   methods: {
-    rosInit() {
-      this.width = document.body.clientWidth - 150;
-      this.height = document.body.clientHeight - 190;
-      const viewer = new this.$ROS3D.Viewer({
-        divID: "map",
-        width: this.width,
-        height: this.height,
-        antialias: true,
-      });
-      const tfClient = new this.$ROSLIB.TFClient({
-        ros: this.$ros,
-        fixedFrame: "map",
-        angularThres: 0.01,
-        transThres: 0.01,
-      });
-      const gridClient = new this.$ROS3D.OccupancyGridClient({
-        ros: this.$ros,
-        viewer: viewer,
-        tfClient: tfClient,
-        rootObject: viewer.selectableObjects,
-        continuous: true,
-        name: "occupancyGrid",
-      });
-    },
+    // rosInit() {
+    //   this.width = document.body.clientWidth - 150;
+    //   this.height = document.body.clientHeight - 190;
+    //   const viewer = new this.$ROS3D.Viewer({
+    //     divID: "map",
+    //     width: this.width,
+    //     height: this.height,
+    //     antialias: true,
+    //   });
+    //   const tfClient = new this.$ROSLIB.TFClient({
+    //     ros: this.$ros,
+    //     fixedFrame: "map",
+    //     angularThres: 0.01,
+    //     transThres: 0.01,
+    //   });
+    //   const gridClient = new this.$ROS3D.OccupancyGridClient({
+    //     ros: this.$ros,
+    //     viewer: viewer,
+    //     tfClient: tfClient,
+    //     rootObject: viewer.selectableObjects,
+    //     continuous: true,
+    //     name: "occupancyGrid",
+    //   });
+    // },
     logOut() {
       this.$store.dispatch("logOut");
       this.$router.push({

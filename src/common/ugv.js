@@ -8,10 +8,9 @@ class UgvUtil {
   };
   constructor(){
   };
-  loadUgvInfo(commit,ugv_state){
-    if(ugv_state.code===200){
-      commit(UGVINFO,ugv_state.ugv_info);
-    }
+
+  loadUgvInfo(commit,ugv_info){
+    commit(UGVINFO,ugv_info);
   }
 }
 const ugvUtil=UgvUtil.getInstance();

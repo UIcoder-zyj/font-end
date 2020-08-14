@@ -37,11 +37,14 @@ export default {
   methods: {
     handleSelect(keyPath) {
       let key = parseInt(keyPath[0]);
-      console.log("key and current_index is :", key, " ", this.current_index);
+
+      console.log("key and current_index is :", typeof(key), key, " ", this.current_index);
 
       if (key < this.titles.length) {
-        if (this.current_index !== key) {
-          //  this.current_index=key;
+        if (this.current_index !== key.toString()) {
+          this.current_index=key.toString();
+          console.log("key and current_index is :", typeof(key), key, " ", this.current_index);
+
           this.$router.replace(this.route_name[key]);
         }
       } else {

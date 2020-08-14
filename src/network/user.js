@@ -1,8 +1,14 @@
 import api from "./api";
 import  apiConfig from './apiConfig.js'
-
-export default class UserRequestHandler {
+class UserRequestHandler {
+  static getInstance(){
+    if(!this.instance){
+        this.instance=new UserRequestHandler();
+      }
+      return this.instance;
+  }
   constructor(){
+    this.instance=null;
   }
 
   login({ loginUser, loginPassword }){
@@ -34,3 +40,5 @@ export default class UserRequestHandler {
   }
 }
 
+const userRequest=UserRequestHandler.getInstance();
+export default userRequest;

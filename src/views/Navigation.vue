@@ -21,7 +21,7 @@ import Workspace from "components/content/Workspace";
 import States from "components/content/States";
 
 import Resource from "components/content/resource/Resource";
-import { rosInitMixin } from "common/mixins";
+import { rosInitMixin,getDataMixin } from "common/mixins";
 export default {
   data() {
     return {
@@ -207,6 +207,7 @@ export default {
         {
           label: "button",
           title: "下载此地图",
+          link: '/api/map/download_map'
         },
       ],
     };
@@ -217,11 +218,12 @@ export default {
     Workspace,
     States,
   },
+  mixins: [rosInitMixin,getDataMixin],
+
   created() {
     // this.getUserInfo()
   },
 
-  mixins: [rosInitMixin],
   methods: {
     getUserInfo() {
       this.$store.dispatch("getUserInfo");

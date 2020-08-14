@@ -27,9 +27,8 @@ class API{
 
   interceptRequest(config){
     return this.instance.interceptors.request.use(config=>{
-      let token;
-      if(store.state.user_info&&store.state.user_info.token){
-        token=this.$store.user_info.token;
+      let token=sessionStorage.getItem('token');
+      if(token){
         config.headers.common['Authorization'] = token;
       }
      return config;

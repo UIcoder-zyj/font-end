@@ -16,7 +16,6 @@
         <el-button class="el-button-style" type="primary" size="mini" round>重置为默认值</el-button>
       </el-form>
     </el-collapse-item>
-
   </el-collapse>
 </template>
 
@@ -31,12 +30,11 @@ export default {
           data: "",
         },
         {
-          type: 'input',
+          type: "input",
           name: "循环次数",
           data: "",
         },
         {
-
           name: "站点等待时间",
           data: "",
         },
@@ -68,7 +66,7 @@ export default {
           name: "规划安全距离",
           data: "",
         },
-         {
+        {
           name: "灵活规划开关",
           data: "",
         },
@@ -135,8 +133,12 @@ export default {
 <style scoped>
 .el-form {
   font-size: 10px;
+  text-align: center;
 }
-
+.el-form el-button {
+  padding-top: 10px;
+  /* margin-bottom: 0px; */
+}
 .el-form-style {
   margin-left: 0px;
   margin-bottom: 0px;

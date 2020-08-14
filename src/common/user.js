@@ -8,11 +8,12 @@ class UserUtil {
   };
   constructor(){
   };
-  loadUserInfo(commit,user_state){
-    if(user_state.code===100){
-      // console.log('user_state is:',user_state.user_info)
-      commit(USERINFO,user_state.user_info);
-    }
+  loadUserInfo(commit,user_info){
+    console.log('user_state is:',user_info);
+    sessionStorage.setItem('token',user_info.token);
+    console.log('set token is :',sessionStorage.getItem('token'));
+    commit(USERINFO,user_info);
+
   }
 }
 const userUtil=UserUtil.getInstance();

@@ -143,6 +143,10 @@ export default {
 <style scoped>
 .el-form {
   font-size: 10px;
+  text-align: center;
+}
+.el-form el-button {
+  padding-top: 10px;
 }
 
 .el-form-style {

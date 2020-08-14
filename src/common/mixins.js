@@ -40,3 +40,28 @@ export const rosInitMixin={
     this.rosInit();
   },
 }
+
+export const getDataMixin={
+  created(){
+    this.getData();
+  },
+  methods:{
+    getData(){
+      if(this.$store.state.user_info
+        && Object.keys( this.$store.state.user_info).length!==0 ){
+          console.log( this.$store.state.user_info);
+          console.log( this.$store.state.user_info);
+
+          console.log( this.$store.state.user_info);
+
+          console.log('data has been loaded');
+          return;
+      }
+      this.$store.dispatch('getData').then((res) => {
+        console.log('getData is : ');
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
+  }
+}

@@ -6,6 +6,8 @@ const mutations = {
   },
   [types.USERINFO]: (state, payload) => {
     state.user_info = payload
+    console.log('we go to the mutation',state.user_info);
+
   },
   [types.MAPINFO]: (state, payload) => {
     state.map_info = payload
